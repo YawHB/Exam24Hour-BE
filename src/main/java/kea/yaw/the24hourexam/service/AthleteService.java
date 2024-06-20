@@ -38,6 +38,7 @@ public class AthleteService {
     }
     }
 
+    //TODO Kun opret en ny atlet hvis navn ikke findes i databasen
     public Optional<Athlete> createAthlete(Athlete athlete) {
         // Fetch the disciplines from the database
         //
@@ -47,6 +48,7 @@ public class AthleteService {
         return Optional.of(athleteRepository.save(athlete));
     }
 
+    //TODO Kun opdater en atlet hvis nye navn ikke findes i databasen
     public Optional<Athlete> updateAthlete(Long id, Athlete athlete) {
         Optional<Athlete> athleteEntity = athleteRepository.findById(id);
         if (athleteEntity.isPresent()) {
