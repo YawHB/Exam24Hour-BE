@@ -73,27 +73,27 @@ public class InitData implements CommandLineRunner {
         } else {
             System.out.println("Creating athletes");
 
-            // Fetch disciplines from the database
-            Discipline spydkast = disciplineRepository.findByName("Spydkast");
-            Discipline løb100m = disciplineRepository.findByName("100 meter løb");
-            Discipline højdespring = disciplineRepository.findByName("Højdespring");
-            Discipline længdespring = disciplineRepository.findByName("Længdespring");
-
+// Fetch disciplines from the database
+            Discipline spydkast = disciplineRepository.findByName("Spydkast").orElseThrow(() -> new RuntimeException("Discipline not found: Spydkast"));
+            Discipline løb100m = disciplineRepository.findByName("100 meter løb").orElseThrow(() -> new RuntimeException("Discipline not found: 100 meter løb"));
+            Discipline højdespring = disciplineRepository.findByName("Højdespring").orElseThrow(() -> new RuntimeException("Discipline not found: Højdespring"));
+            Discipline længdespring = disciplineRepository.findByName("Længdespring").orElseThrow(() -> new RuntimeException("Discipline not found: Længdespring"));
 
             Set<Athlete> athletesToCreate = Set.of(
-                    new Athlete("James", "M", 25, "klub København", Set.of(spydkast, løb100m)),
-            new Athlete("John", "M", 24, "klub Århus", Set.of(løb100m, højdespring)),
-                    new Athlete("Jane", "F", 23, "klub Odense", Set.of(spydkast, længdespring)),
-                    new Athlete("Julia", "F", 22, "klub København", Set.of(højdespring, længdespring)),
-                    new Athlete("Jack", "M", 21, "klub Århus", Set.of(spydkast, højdespring)),
-                    new Athlete("Jill", "F", 20, "klub Odense", Set.of(løb100m, længdespring)),
-                    new Athlete("Jeremy", "M", 19, "klub København", Set.of(spydkast, løb100m)),
-                    new Athlete("Jessica", "F", 18, "klub Århus", Set.of(højdespring, længdespring)),
-                    new Athlete("Jacob", "M", 17, "klub Odense", Set.of(spydkast, løb100m)),
-                    new Athlete("Jasmine", "F", 16, "klub København", Set.of(løb100m, højdespring))
+                    new Athlete("James", "M", 25, " København", Set.of(spydkast, løb100m)),
+                    new Athlete("John", "M", 24, " Århus", Set.of(løb100m, højdespring)),
+                    new Athlete("Jane", "F", 23, " Odense", Set.of(spydkast, længdespring)),
+                    new Athlete("Julia", "F", 22, " København", Set.of(højdespring, længdespring)),
+                    new Athlete("Jack", "M", 21, " Århus", Set.of(spydkast, højdespring)),
+                    new Athlete("Jill", "F", 20, " Odense", Set.of(løb100m, længdespring)),
+                    new Athlete("Jeremy", "M", 19, " København", Set.of(spydkast, løb100m)),
+                    new Athlete("Jessica", "F", 18, " Århus", Set.of(højdespring, længdespring)),
+                    new Athlete("Jacob", "M", 17, " Odense", Set.of(spydkast, løb100m)),
+                    new Athlete("Jasmine", "F", 16, " København", Set.of(løb100m, højdespring))
+            );
 
                     // ...
-            );
+
             athleteRepository.saveAll(athletesToCreate);
         }
     }

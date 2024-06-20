@@ -41,8 +41,8 @@ public class AthleteService {
     public Optional<Athlete> createAthlete(Athlete athlete) {
         // Fetch the disciplines from the database
         Set<Discipline> disciplines = athlete.getDisciplines().stream()
-                .map(discipline -> disciplineRepository.findById(discipline.getId())
-                        .orElseThrow(() -> new RuntimeException("Discipline not found: " + discipline.getId())))
+                .map(discipline -> disciplineRepository.findByName(discipline.getName())
+                        .orElseThrow(() -> new RuntimeException("Discipline not found: " + discipline.getName())))
                 .collect(Collectors.toSet());
 
         // Set the fetched disciplines in the athlete object
