@@ -1,20 +1,26 @@
 package kea.yaw.the24hourexam.service;
 
 import kea.yaw.the24hourexam.model.Athlete;
+import kea.yaw.the24hourexam.model.Discipline;
 import kea.yaw.the24hourexam.repository.AthleteRepository;
+import kea.yaw.the24hourexam.repository.DisciplineRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Service
 public class AthleteService {
 
     private final AthleteRepository athleteRepository;
+    private final DisciplineRepository disciplineRepository;
 
-    public AthleteService(AthleteRepository athleteRepository) {
+    public AthleteService(AthleteRepository athleteRepository, DisciplineRepository disciplineRepository) {
         this.athleteRepository = athleteRepository;
+        this.disciplineRepository = disciplineRepository;
     }
 
 
@@ -30,5 +36,19 @@ public class AthleteService {
     } else {
         return Optional.empty();
     }
+    }
+
+    public Optional<Athlete> createAthlete(Athlete athlete) {
+        // Fetch the disciplines from the database
+        Set<Discipline> disciplines = athlete.getDisciplines().stream()
+                .map(discipline -> disciplineRepository.findById(discipline.getId())
+                        .orElseThrow(() -> new RuntimeException("Discipline not found: " + discipline.getId())))
+                .collect(Collectors.toSet());
+
+        // Set the fetched disciplines in the athlete object
+        athlete.setDisciplines(disciplines);
+
+        // Save the athlete object
+        return Optional.of(athleteRepository.save(athlete));
     }
 }

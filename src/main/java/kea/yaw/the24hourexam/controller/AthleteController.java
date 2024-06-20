@@ -3,10 +3,7 @@ package kea.yaw.the24hourexam.controller;
 import kea.yaw.the24hourexam.model.Athlete;
 import kea.yaw.the24hourexam.service.AthleteService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,6 +34,16 @@ public class AthleteController {
             return ResponseEntity.ok(athlete.get());
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping()
+    public ResponseEntity<Athlete> createAthlete(@RequestBody Athlete athlete) {
+        Optional<Athlete> newAthlete = athleteService.createAthlete(athlete);
+        if (newAthlete.isPresent()) {
+            return ResponseEntity.status(201).body(newAthlete.get());
+        } else {
+            return ResponseEntity.badRequest().build();
         }
     }
 
