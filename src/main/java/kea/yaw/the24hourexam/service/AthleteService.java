@@ -40,15 +40,35 @@ public class AthleteService {
 
     public Optional<Athlete> createAthlete(Athlete athlete) {
         // Fetch the disciplines from the database
-        Set<Discipline> disciplines = athlete.getDisciplines().stream()
-                .map(discipline -> disciplineRepository.findByName(discipline.getName())
-                        .orElseThrow(() -> new RuntimeException("Discipline not found: " + discipline.getName())))
-                .collect(Collectors.toSet());
-
-        // Set the fetched disciplines in the athlete object
-        athlete.setDisciplines(disciplines);
+        //
+      fetchAndSetDisciplines(athlete);
 
         // Save the athlete object
         return Optional.of(athleteRepository.save(athlete));
+    }
+
+    public Optional<Athlete> updateAthlete(Long id, Athlete athlete) {
+        Optional<Athlete> athleteEntity = athleteRepository.findById(id);
+        if (athleteEntity.isPresent()) {
+
+            fetchAndSetDisciplines(athlete);
+
+            Athlete originalAthlete = athleteEntity.get();
+            originalAthlete.setName(athlete.getName());
+            originalAthlete.setSex(athlete.getSex());
+            originalAthlete.setAge(athlete.getAge());
+            originalAthlete.setClub(athlete.getClub());
+            originalAthlete.setDisciplines(athlete.getDisciplines());
+            return Optional.of(athleteRepository.save(originalAthlete));
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    private void fetchAndSetDisciplines(Athlete athlete) {
+        Set<Discipline> disciplines = athlete.getDisciplines().stream()
+                .map(discipline -> disciplineRepository.findByName(discipline.getName()).orElse(discipline))
+                .collect(Collectors.toSet());
+        athlete.setDisciplines(disciplines);
     }
 }

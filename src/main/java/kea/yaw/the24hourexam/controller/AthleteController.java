@@ -47,4 +47,14 @@ public class AthleteController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Athlete> updateAthlete(@PathVariable Long id, @RequestBody Athlete athlete) {
+        Optional<Athlete> updatedAthlete = athleteService.updateAthlete(id, athlete);
+        if (updatedAthlete.isPresent()) {
+            return ResponseEntity.ok(updatedAthlete.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
