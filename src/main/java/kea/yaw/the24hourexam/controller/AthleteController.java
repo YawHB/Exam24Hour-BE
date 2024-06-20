@@ -37,6 +37,7 @@ public class AthleteController {
         }
     }
 
+
     @GetMapping("/name/{name}")
     public ResponseEntity<Athlete> getSingleAthlete(@PathVariable String name) {
 
@@ -63,6 +64,16 @@ public class AthleteController {
         Optional<Athlete> updatedAthlete = athleteService.updateAthlete(id, athlete);
         if (updatedAthlete.isPresent()) {
             return ResponseEntity.ok(updatedAthlete.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAthlete(@PathVariable Long id) {
+        Optional<Athlete> deletedAthlete = athleteService.deleteAthlete(id);
+        if (deletedAthlete.isPresent()) {
+            return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
         }

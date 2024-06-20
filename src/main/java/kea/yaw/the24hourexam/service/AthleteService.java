@@ -82,4 +82,14 @@ public class AthleteService {
             return Optional.empty();
         }
     }
+
+    public Optional<Athlete> deleteAthlete(Long id) {
+        Optional<Athlete> athlete = athleteRepository.findById(id);
+        if (athlete.isPresent()) {
+            athleteRepository.deleteById(id);
+            return athlete;
+        } else {
+            return Optional.empty();
+        }
+    }
 }
