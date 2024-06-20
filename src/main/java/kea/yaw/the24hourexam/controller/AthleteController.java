@@ -37,6 +37,17 @@ public class AthleteController {
         }
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Athlete> getSingleAthlete(@PathVariable String name) {
+
+        Optional<Athlete> athlete = athleteService.findByName(name);
+        if (athlete.isPresent()) {
+            return ResponseEntity.ok(athlete.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping()
     public ResponseEntity<Athlete> createAthlete(@RequestBody Athlete athlete) {
         Optional<Athlete> newAthlete = athleteService.createAthlete(athlete);

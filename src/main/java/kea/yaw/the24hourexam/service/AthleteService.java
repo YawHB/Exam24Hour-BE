@@ -71,4 +71,13 @@ public class AthleteService {
                 .collect(Collectors.toSet());
         athlete.setDisciplines(disciplines);
     }
+
+    public Optional<Athlete> findByName(String name) {
+        Optional<Athlete> athlete = athleteRepository.findByName(name);
+        if (athlete.isPresent()) {
+            return athlete;
+        } else {
+            return Optional.empty();
+        }
+    }
 }
