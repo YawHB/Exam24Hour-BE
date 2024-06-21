@@ -49,20 +49,24 @@ public class InitData implements CommandLineRunner {
 
             // Create each discipline as a separate variable
             Discipline spydkast = new Discipline("Spydkast", EnumResultType.DISTANCE);
-            Discipline løb100m = new Discipline("100 meter løb", EnumResultType.TIME);
-            Discipline højdespring = new Discipline("Højdespring", EnumResultType.DISTANCE);
-            Discipline længdespring = new Discipline("Længdespring", EnumResultType.DISTANCE);
-            Discipline kuglestød = new Discipline("Kuglestød", EnumResultType.DISTANCE);
             Discipline stangspring = new Discipline("Stangspring", EnumResultType.DISTANCE);
-            Discipline maraton = new Discipline("Maraton", EnumResultType.TIME);
-            Discipline hækkeløb = new Discipline("Hækkeløb", EnumResultType.TIME);
+
+            Discipline løb100m = new Discipline("100 meter løb", EnumResultType.TIME);
             Discipline stafetløb = new Discipline("Stafetløb", EnumResultType.TIME);
+
             Discipline trekamp = new Discipline("Trekamp", EnumResultType.POINTS);
-            Discipline femkamp = new Discipline("Femkamp", EnumResultType.POINTS);
+
+
+           // Discipline højdespring = new Discipline("Højdespring", EnumResultType.DISTANCE);
+           // Discipline længdespring = new Discipline("Længdespring", EnumResultType.DISTANCE);
+           // Discipline kuglestød = new Discipline("Kuglestød", EnumResultType.DISTANCE);
+          //  Discipline maraton = new Discipline("Maraton", EnumResultType.TIME);
+            //Discipline hækkeløb = new Discipline("Hækkeløb", EnumResultType.TIME);
+           // Discipline femkamp = new Discipline("Femkamp", EnumResultType.POINTS);
 
             // Save disciplines in a Set
             Set<Discipline> disciplinesToCreate = Set.of(
-                    spydkast, løb100m, højdespring, længdespring, kuglestød, stangspring, maraton, hækkeløb, stafetløb, trekamp, femkamp
+                    spydkast, løb100m, stangspring,  stafetløb, trekamp
             );
 
             // Save disciplines in the database
@@ -79,20 +83,23 @@ public class InitData implements CommandLineRunner {
 // Fetch disciplines from the database
             Discipline spydkast = disciplineRepository.findByName("Spydkast").orElseThrow(() -> new RuntimeException("Discipline not found: Spydkast"));
             Discipline løb100m = disciplineRepository.findByName("100 meter løb").orElseThrow(() -> new RuntimeException("Discipline not found: 100 meter løb"));
-            Discipline højdespring = disciplineRepository.findByName("Højdespring").orElseThrow(() -> new RuntimeException("Discipline not found: Højdespring"));
-            Discipline længdespring = disciplineRepository.findByName("Længdespring").orElseThrow(() -> new RuntimeException("Discipline not found: Længdespring"));
+            Discipline stafetløb = disciplineRepository.findByName("Stafetløb").orElseThrow(() -> new RuntimeException("Discipline not found: Stafetløb"));
+            Discipline trekamp = disciplineRepository.findByName("Trekamp").orElseThrow(() -> new RuntimeException("Discipline not found: Trekamp"));
+            Discipline stangspring = disciplineRepository.findByName("Stangspring").orElseThrow(() -> new RuntimeException("Discipline not found: Stangspring"));
+           // Discipline højdespring = disciplineRepository.findByName("Højdespring").orElseThrow(() -> new RuntimeException("Discipline not found: Højdespring"));
+           // Discipline længdespring = disciplineRepository.findByName("Længdespring").orElseThrow(() -> new RuntimeException("Discipline not found: Længdespring"));
 
             Set<Athlete> athletesToCreate = Set.of(
                     new Athlete("James", "M", 25, " København", Set.of(spydkast, løb100m)),
-                    new Athlete("John", "M", 24, " Århus", Set.of(løb100m, højdespring)),
-                    new Athlete("Jane", "F", 23, " Odense", Set.of(spydkast, længdespring)),
-                    new Athlete("Julia", "F", 22, " København", Set.of(højdespring, længdespring)),
-                    new Athlete("Jack", "M", 21, " Århus", Set.of(spydkast, højdespring)),
-                    new Athlete("Jill", "F", 20, " Odense", Set.of(løb100m, længdespring)),
+                    new Athlete("John", "M", 24, " Århus", Set.of(løb100m, stafetløb)),
+                    new Athlete("Jane", "F", 23, " Odense", Set.of(spydkast, trekamp)),
+                    new Athlete("Julia", "F", 22, " København", Set.of(stangspring, trekamp)),
+                    new Athlete("Jack", "M", 21, " Århus", Set.of(spydkast, stafetløb)),
+                    new Athlete("Jill", "F", 20, " Odense", Set.of(løb100m, trekamp)),
                     new Athlete("Jeremy", "M", 19, " København", Set.of(spydkast, løb100m)),
-                    new Athlete("Jessica", "F", 18, " Århus", Set.of(højdespring, længdespring)),
+                    new Athlete("Jessica", "F", 18, " Århus", Set.of(stafetløb, trekamp)),
                     new Athlete("Jacob", "M", 17, " Odense", Set.of(spydkast, løb100m)),
-                    new Athlete("Jasmine", "F", 16, " København", Set.of(løb100m, højdespring))
+                    new Athlete("Jasmine", "F", 16, " København", Set.of(løb100m, stafetløb))
             );
 
                     // ...
@@ -118,17 +125,17 @@ public class InitData implements CommandLineRunner {
         // Fetch disciplines from the database
         Discipline spydkast = disciplineRepository.findByName("Spydkast").orElseThrow(() -> new RuntimeException("Discipline not found: Spydkast"));
         Discipline løb100m = disciplineRepository.findByName("100 meter løb").orElseThrow(() -> new RuntimeException("Discipline not found: 100 meter løb"));
-        Discipline højdespring = disciplineRepository.findByName("Højdespring").orElseThrow(() -> new RuntimeException("Discipline not found: Højdespring"));
-        Discipline længdespring = disciplineRepository.findByName("Længdespring").orElseThrow(() -> new RuntimeException("Discipline not found: Længdespring"));
+        Discipline stafetløb = disciplineRepository.findByName("Stafetløb").orElseThrow(() -> new RuntimeException("Discipline not found: Højdespring"));
+        Discipline trekamp = disciplineRepository.findByName("Trekamp").orElseThrow(() -> new RuntimeException("Discipline not found: Længdespring"));
 
         // Create results
         Set<Result> resultsToCreate = Set.of(
                 new Result(james, spydkast, EnumResultType.DISTANCE, java.time.LocalDate.now(), 50.0),
         new Result(james, løb100m, EnumResultType.TIME, java.time.LocalDate.now(), 10.0),
-        new Result(james, højdespring, EnumResultType.DISTANCE, java.time.LocalDate.now(), 2.0),
+        new Result(james, stafetløb, EnumResultType.TIME, java.time.LocalDate.now(), 56.0),
         new Result(john, løb100m, EnumResultType.TIME, java.time.LocalDate.now(), 9.5),
         new Result(jane, spydkast, EnumResultType.DISTANCE, java.time.LocalDate.now(), 45.0),
-        new Result(jane, længdespring, EnumResultType.DISTANCE, java.time.LocalDate.now(), 4.0)
+        new Result(jane, trekamp, EnumResultType.POINTS, java.time.LocalDate.now(), 15.0)
 
         );
         resultRepository.saveAll(resultsToCreate);
