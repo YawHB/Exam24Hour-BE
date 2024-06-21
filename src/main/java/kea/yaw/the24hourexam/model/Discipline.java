@@ -1,6 +1,7 @@
 package kea.yaw.the24hourexam.model;
 
 import jakarta.persistence.*;
+import kea.yaw.the24hourexam.enums.EnumResultType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,9 +18,12 @@ public class Discipline {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     String name;
+    @Enumerated(EnumType.STRING)
+    EnumResultType resultType;
 
 
-    public Discipline(String name) {
+    public Discipline(String name, EnumResultType resultType) {
         this.name = name;
+        this.resultType = resultType;
     }
 }

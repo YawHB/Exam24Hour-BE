@@ -1,5 +1,6 @@
 package kea.yaw.the24hourexam.config;
 
+import kea.yaw.the24hourexam.enums.EnumResultType;
 import kea.yaw.the24hourexam.model.Athlete;
 import kea.yaw.the24hourexam.model.Discipline;
 import kea.yaw.the24hourexam.repository.AthleteRepository;
@@ -42,24 +43,21 @@ public class InitData implements CommandLineRunner {
             System.out.println("Creating disciplines");
 
             // Create each discipline as a separate variable
-            Discipline spydkast = new Discipline("Spydkast");
-            Discipline løb100m = new Discipline("100 meter løb");
-            Discipline højdespring = new Discipline("Højdespring");
-            Discipline længdespring = new Discipline("Længdespring");
-            Discipline kuglestød = new Discipline("Kuglestød");
-            Discipline stangspring = new Discipline("Stangspring");
-            Discipline maraton = new Discipline("Maraton");
-            Discipline hækkeløb = new Discipline("Hækkeløb");
-            Discipline stafetløb = new Discipline("Stafetløb");
-            Discipline trekamp = new Discipline("Trekamp");
-            Discipline femkamp = new Discipline("Femkamp");
-            Discipline seksikamp = new Discipline("Seksikamp");
-            Discipline syvkamp = new Discipline("Syvkamp");
-            Discipline tikamp = new Discipline("Ti-kamp");
+            Discipline spydkast = new Discipline("Spydkast", EnumResultType.DISTANCE);
+            Discipline løb100m = new Discipline("100 meter løb", EnumResultType.TIME);
+            Discipline højdespring = new Discipline("Højdespring", EnumResultType.DISTANCE);
+            Discipline længdespring = new Discipline("Længdespring", EnumResultType.DISTANCE);
+            Discipline kuglestød = new Discipline("Kuglestød", EnumResultType.DISTANCE);
+            Discipline stangspring = new Discipline("Stangspring", EnumResultType.DISTANCE);
+            Discipline maraton = new Discipline("Maraton", EnumResultType.TIME);
+            Discipline hækkeløb = new Discipline("Hækkeløb", EnumResultType.TIME);
+            Discipline stafetløb = new Discipline("Stafetløb", EnumResultType.TIME);
+            Discipline trekamp = new Discipline("Trekamp", EnumResultType.POINTS);
+            Discipline femkamp = new Discipline("Femkamp", EnumResultType.POINTS);
 
             // Save disciplines in a Set
             Set<Discipline> disciplinesToCreate = Set.of(
-                    spydkast, løb100m, højdespring, længdespring, kuglestød, stangspring, maraton, hækkeløb, stafetløb, trekamp, femkamp, seksikamp, syvkamp, tikamp
+                    spydkast, løb100m, højdespring, længdespring, kuglestød, stangspring, maraton, hækkeløb, stafetløb, trekamp, femkamp
             );
 
             // Save disciplines in the database
