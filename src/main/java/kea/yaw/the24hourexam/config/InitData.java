@@ -114,13 +114,6 @@ public class InitData implements CommandLineRunner {
         Athlete james = athleteRepository.findByName("James").orElseThrow(() -> new RuntimeException("Athlete not found: James"));
         Athlete john = athleteRepository.findByName("John").orElseThrow(() -> new RuntimeException("Athlete not found: John"));
         Athlete jane = athleteRepository.findByName("Jane").orElseThrow(() -> new RuntimeException("Athlete not found: Jane"));
-        Athlete julia = athleteRepository.findByName("Julia").orElseThrow(() -> new RuntimeException("Athlete not found: Julia"));
-        Athlete jack = athleteRepository.findByName("Jack").orElseThrow(() -> new RuntimeException("Athlete not found: Jack"));
-        Athlete jill = athleteRepository.findByName("Jill").orElseThrow(() -> new RuntimeException("Athlete not found: Jill"));
-        Athlete jeremy = athleteRepository.findByName("Jeremy").orElseThrow(() -> new RuntimeException("Athlete not found: Jeremy"));
-        Athlete jessica = athleteRepository.findByName("Jessica").orElseThrow(() -> new RuntimeException("Athlete not found: Jessica"));
-        Athlete jacob = athleteRepository.findByName("Jacob").orElseThrow(() -> new RuntimeException("Athlete not found: Jacob"));
-        Athlete jasmine = athleteRepository.findByName("Jasmine").orElseThrow(() -> new RuntimeException("Athlete not found: Jasmine"));
 
         // Fetch disciplines from the database
         Discipline spydkast = disciplineRepository.findByName("Spydkast").orElseThrow(() -> new RuntimeException("Discipline not found: Spydkast"));
@@ -132,7 +125,6 @@ public class InitData implements CommandLineRunner {
         Set<Result> resultsToCreate = Set.of(
                 new Result(james, spydkast, EnumResultType.DISTANCE, java.time.LocalDate.now(), 50.0),
         new Result(james, løb100m, EnumResultType.TIME, java.time.LocalDate.now(), 10.0),
-        new Result(james, stafetløb, EnumResultType.TIME, java.time.LocalDate.now(), 56.0),
         new Result(john, løb100m, EnumResultType.TIME, java.time.LocalDate.now(), 9.5),
         new Result(jane, spydkast, EnumResultType.DISTANCE, java.time.LocalDate.now(), 45.0),
         new Result(jane, trekamp, EnumResultType.POINTS, java.time.LocalDate.now(), 15.0)
