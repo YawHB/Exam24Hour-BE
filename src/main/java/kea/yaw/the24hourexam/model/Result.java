@@ -33,6 +33,12 @@ public class Result {
     private LocalDate date;
     private Double  resultValue;
 
+
+    public Result(Athlete athlete, Discipline discipline) {
+        this.athlete = athlete;
+        this.discipline = discipline;
+    }
+
     public Result(Athlete athlete, Discipline discipline, EnumResultType resultType, LocalDate date, Double resultValue) {
         this.athlete = athlete;
         this.discipline = discipline;
@@ -40,4 +46,6 @@ public class Result {
         this.date = date;
         this.resultValue = resultValue;
     }
+
+
 }
